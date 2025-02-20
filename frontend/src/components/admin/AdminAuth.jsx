@@ -1,18 +1,27 @@
-import { useState } from "react";
-import logo from '../assets/logo.png'
+import { useRef } from "react"
 
-const UserAuth = () => {
+import logo from '../../assets/logo.png'
 
-    const [signUpForm, setSignUpForm] = useState(true);
+const AdminAuth = () => {
 
-    const toggle = () => {
-        console.log(signUpForm)
-        setSignUpForm(!signUpForm);
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const formSubmit = (event) => {
+        event.preventDefault()
+
+        console.log("email", emailRef.current.value);
+        console.log("password", passwordRef.current.value);
+
+        const adminDetails = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+        }
+
+
     }
-
     return (
         <>
-
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
@@ -21,40 +30,22 @@ const UserAuth = () => {
                         className="mx-auto h-20 w-auto"
                     />
                     <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                        {signUpForm ? "Sign Up" : "Sign In"}
+                        Admin Sign In
                     </h2>
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form action="#" method="POST" className="space-y-6">
-
-                        {signUpForm ? (
-                            <div>
-                                <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
-                                    User Name
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id="name"
-                                        name="name"
-                                        type="text"
-                                        required
-                                        autoComplete="email"
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                    />
-                                </div>
-                            </div>
-                        ) : ("")}
-
+                    <form onSubmit={formSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                                Email ID
+                                Email address
                             </label>
                             <div className="mt-2">
                                 <input
                                     id="email"
                                     name="email"
                                     type="email"
+                                    ref={emailRef}
                                     required
                                     autoComplete="email"
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -73,6 +64,7 @@ const UserAuth = () => {
                                     id="password"
                                     name="password"
                                     type="password"
+                                    ref={passwordRef}
                                     required
                                     autoComplete="current-password"
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -85,24 +77,15 @@ const UserAuth = () => {
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                {signUpForm ? "Sign Up" : " Sign In"}
+                                Sign in
                             </button>
                         </div>
                     </form>
 
-                    <p className="mt-10 text-center text-sm/6 text-gray-500">
-
-                        {signUpForm ? "Already our user ? " : "Not a member ? "}
-
-                        <a href="#" onClick={toggle}
-                            className="font-semibold text-indigo-600 hover:text-indigo-500">
-                            {signUpForm ? "Sign In" : "Sign Up"}
-                        </a>
-                    </p>
                 </div>
             </div>
         </>
     )
 }
 
-export default UserAuth;
+export default AdminAuth;

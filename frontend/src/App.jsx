@@ -1,9 +1,11 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router'
 
-import UserAuth from './components/UserAuth';
+import UserAuth from './components/user/UserAuth';
 import Home from './components/Home';
-import AdminLogin from './components/admin/AdminLogin';
+
+import AdminAuth from './components/admin/AdminAuth';
+import Dashboard from './components/admin/Dashboard';
 
 const App = () => {
   return (
@@ -13,7 +15,8 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/userAuth' element={<UserAuth />} />
 
-        <Route path='/adminLogin' element={<AdminLogin />} />
+        <Route path='/adminAuth' element={<AdminAuth />} />
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
 
     </ BrowserRouter>
